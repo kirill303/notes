@@ -10,10 +10,10 @@ const Header: FC<HeaderProps> = ({ addNote, newId }) => {
    const [text, setText] = useState<string>('');
    return (
       <header className='header'>
-         <h1 className='title'>Добавить заметку</h1>
-         <input type="text" value={name} placeholder='Сюда имя' onChange={(e) => setName(e.target.value)} className='name' />
-         <input type="text" value={text} placeholder='Сюда текст' onChange={(e) => setText(e.target.value)} className='text' />
-         <button onClick={() => addNote({ name, text, date: new Date, id:newId() })} className='add' />
+         <h1 className='title'>Add assets</h1>
+         <input type="text" value={name} placeholder='Сюда имя' onChange={(e) => e && setName(e.target.value)} className='name' />
+         <input type="text" value={text} placeholder='Сюда текст' onChange={(e) => e && setText(e.target.value)} className='text' />
+         <button onClick={() => (name && text) && addNote({ name, text, date: new Date, id: newId() })} className='add' />
       </header>
    )
 }
