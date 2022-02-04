@@ -25,48 +25,85 @@ main{
    flex-direction: column;
    align-items: center;
 }
+
+.title{
+   margin: 20px;
+}
+.done{
+   margin: 0 20px;
+}
+
+
+
+
+.name{
+height: 100%;
+margin: 0 5px 0 0 ;
+}
+.text{
+   height: 200px;
+}
+.add{
+   background-color: tomato;
+   width: 50px;
+   height: 100%;
+}
+.nb{
+   height: 50px;
+   display: flex;
+   align-items: center;
+}
+
+
+
+
+.new__bars-menu{
+   padding: 0px;
+   width: 700px;
+   transition: 1.4s;
+   position: absolute;
+   right: 10%;
+   top: 10%;
+   background-color: black;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+
+   z-index: 2;
+   overflow: hidden;
+}
+
 .notes{
    width: 70%;
    transform: 1000s;
 }
 .note{
-   padding: 30px;
    margin: 20px 0 ;
 width: 100%;
-border: 3px solid black;
 background-color: white;
 display: flex;
+flex-direction: column;
 justify-content: space-between;
 }
-.title{
-   margin: 20px;
-}
-.name{
-   margin: 0 20px;
-   height: 50px;
-}
-.text{
-   margin: 0 20px;
-height: 50px;
-}
-.add{
-   background-color: tomato;
-   width: 50px;
-   height: 50px;
+.note__top{
+   padding: 20px;
+   display: flex;
+   justify-content: space-between;
 }
 .note__name{
-   max-width: 100%;
+   color: tomato;
+   text-shadow:3px 0px 1px black;
+   width: 100%;
    font-size: 30px;
    font-weight: 800;
 }
 .note__text{
-   max-width: 100%;
+   background-color: grey;
+   width: 100%;
    font-size: 18px;
+   padding:20px;
 }
-.note__left{
-   max-width: 50%;
-   overflow: hidden;
-}
+
 .check{
    font-size: 30px;
    color: green;
@@ -114,6 +151,13 @@ height: 50px;
       opacity: 0.0;
    }
 }
+@media(max-width:768px){
+   .new__bars-menu{
+      padding: 0px;
+      width: 400px;
+      
+   }
+}
 @media (max-width:712px) {
    .header{
       justify-content: center
@@ -125,9 +169,6 @@ height: 50px;
    .text{
       margin: 10px;  
       width: 80%;
-   }
-   .add{
-      margin: 0 40px;
    }
    .notes{
       width: 80%;
@@ -158,7 +199,8 @@ height: 50px;
       font-size: 16px;
    }
    .note{
-      padding: 15px;
+   }
+   .add{
    }
 }
 @media (max-width:425px) {
@@ -166,10 +208,14 @@ height: 50px;
       height: 40px;
    }
    .text{
-   height: 40px;
+   height: 150px;
    }
 .add{
    height: 30px;
    width: 30px;
+}
+.new__bars-menu{
+   right: 2%;
+   width: 300px;
 }
 }

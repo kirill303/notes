@@ -1,7 +1,13 @@
 import React, { Children } from 'react';
 import { Inote } from '../types/types';
 
-export default function changesNote(notes: Inote[], setNotes: (g: any) => void,) {
+export default function useChangesNote
+   (
+      notes: Inote[],
+      setNotes: (g: any) => void,
+      doneNote: number,
+      setDoneNote: (g: number) => void
+   ) {
    function changeNote(g: Inote[]) {
       g = JSON.parse(JSON.stringify(g));
       setNotes(g);
@@ -17,6 +23,7 @@ export default function changesNote(notes: Inote[], setNotes: (g: any) => void,)
       let v = document.getElementById(String(id));
       if (!v) return;
       v.style.animation = type ? '2s greenNote' : '2s redNote'
+      setDoneNote(type ? doneNote + 1 : doneNote - 1);
       setTimeout(() => {
          if (!v) return;
          v.style.animation = ''

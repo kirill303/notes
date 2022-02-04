@@ -1,19 +1,52 @@
-import React, { FC, useState } from 'react';
+import { faArrowAltCircleRight, faBars, faCheck, faCheckCircle, faHamburger } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { FC, useEffect, useState } from 'react';
 import { Inote } from '../types/types';
 
 interface HeaderProps {
    addNote: (note: Inote) => void;
    newId: () => number;
+   doneNote: number
 }
-const Header: FC<HeaderProps> = ({ addNote, newId }) => {
+const Header: FC<HeaderProps> = ({ addNote, newId, doneNote }) => {
    const [name, setName] = useState<string>('');
    const [text, setText] = useState<string>('');
+   const [bars, setBars] = useState<boolean>(false);
+   useEffect(() => {
+      let menu = document.getElementById('.new__bars-menu');
+      if (!menu) return;
+      if (bars) {
+         menu.style.height = '300px';
+         menu.style.padding = '20px';
+         menu.style.display = 'block';
+      } else {
+         menu.style.padding = '0px';
+         menu.style.height = '0px';
+      }
+   }, [bars])
+
+   function preAddNote() {
+      (name && text) && addNote({ name, text, date: new Date, id: newId() })
+      setName('');
+      setText('');
+   }
+
    return (
       <header className='header'>
-         <h1 className='title'>Add assets</h1>
-         <input type="text" value={name} placeholder='Сюда имя' onChange={(e) => e && setName(e.target.value)} className='name' />
-         <input type="text" value={text} placeholder='Сюда текст' onChange={(e) => e && setText(e.target.value)} className='text' />
-         <button onClick={() => (name && text) && addNote({ name, text, date: new Date, id: newId() })} className='add' />
+         <div>
+            <h1 className='title'>Список дел</h1>
+            <div className='done' style={{ color: doneNote > 0 ? 'green' : 'red' }}>Ваша продутивность: {doneNote}</div>
+         </div>
+         <div onClick={() => setBars(!bars)}>
+            <FontAwesomeIcon icon={faBars} style={{ fontSize: '30px' }} onClick={() => setBars(!bars)} />
+         </div>
+         <div className="new__bars-menu" id={'.new__bars-menu'}>
+            <textarea value={text} rows={20} cols={45} placeholder='Сюда текст' onChange={(e) => e && setText(e.target.value)} className='text' />
+            <div className='nb'>
+               <input type="text" value={name} placeholder='Сюда имя' onChange={(e) => e && setName(e.target.value)} className='name' />
+               <button onClick={preAddNote} className='add' ><FontAwesomeIcon icon={faCheckCircle} /></button>
+            </div>
+         </div>
       </header>
    )
 }
