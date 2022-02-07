@@ -12,20 +12,14 @@ const Header: FC<HeaderProps> = ({ addNote, newId, doneNote }) => {
    const [name, setName] = useState<string>('');
    const [text, setText] = useState<string>('');
    const [bars, setBars] = useState<boolean>(false);
+
    useEffect(() => {
       let menu = document.getElementById('.new__bars-menu');
       if (!menu) return;
-      if (bars) {
-         menu.style.height = '300px';
-         menu.style.padding = '20px';
-         menu.style.display = 'block';
-      } else {
-         menu.style.padding = '0px';
-         menu.style.height = '0px';
-      }
+      menu.className = `new__bars-menu ${bars ? 'new__bars-menu-up' : 'new__bars-menu-down'}`
    }, [bars])
 
-   function preAddNote() {
+   function preAddNote(): void {
       (name && text) && addNote({ name, text, date: new Date, id: newId() })
       setName('');
       setText('');
@@ -41,10 +35,27 @@ const Header: FC<HeaderProps> = ({ addNote, newId, doneNote }) => {
             <FontAwesomeIcon icon={faBars} style={{ fontSize: '30px' }} onClick={() => setBars(!bars)} />
          </div>
          <div className="new__bars-menu" id={'.new__bars-menu'}>
-            <textarea value={text} rows={20} cols={45} placeholder='Сюда текст' onChange={(e) => e && setText(e.target.value)} className='text' />
+
+            <textarea
+               value={text}
+               rows={20}
+               cols={45}
+               placeholder='Сюда текст'
+               onChange={(e) => e && setText(e.target.value)}
+               className='text'
+            />
             <div className='nb'>
-               <input type="text" value={name} placeholder='Сюда имя' onChange={(e) => e && setName(e.target.value)} className='name' />
-               <button onClick={preAddNote} className='add' ><FontAwesomeIcon icon={faCheckCircle} /></button>
+               <input type="text"
+                  value={name}
+                  placeholder='Сюда название'
+                  onChange={(e) => e && setName(e.target.value)}
+                  className='name'
+               />
+               <button
+                  onClick={preAddNote}
+                  className='add' >
+                  <FontAwesomeIcon icon={faCheckCircle} />
+               </button>
             </div>
          </div>
       </header>

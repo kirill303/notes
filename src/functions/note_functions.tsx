@@ -8,31 +8,32 @@ export default function useChangesNote
       doneNote: number,
       setDoneNote: (g: number) => void
    ) {
-   function changeNote(g: Inote[]) {
-      g = JSON.parse(JSON.stringify(g));
-      setNotes(g);
+
+   function changeNote(newNote: Inote[]): void {
+      setNotes(
+         JSON.parse(JSON.stringify(newNote))
+      );
    }
+   
    function addNote(note: Inote) {
-      let g = notes;
-      g.push(note);
-      changeNote(g)
+      let newNotes = notes;
+      newNotes.push(note);
+      changeNote(newNotes)
    }
 
    function deleteNote(type: boolean, id: number): void {
-      console.log(id);
       let v = document.getElementById(String(id));
       if (!v) return;
       v.style.animation = type ? '2s greenNote' : '2s redNote'
       setDoneNote(type ? doneNote + 1 : doneNote - 1);
+
       setTimeout(() => {
          if (!v) return;
          v.style.animation = ''
       }, 1999);
 
       setTimeout(() => {
-         let g = notes;
-         g = g.filter(e => e.id !== id);
-         changeNote(g);
+         changeNote(notes.filter(e => e.id !== id));
       }, 2000);
 
    }

@@ -114,7 +114,15 @@ justify-content: space-between;
    color: red;
    margin: 0 10px;
 }
-
+.new__bars-menu-up{
+   height: 300px;
+   padding: 20px;
+   display: block;
+}
+.new__bars-menu-down{
+height: 0;
+padding: 0;
+}
 @keyframes greenNote {
    0%{
       border: none;
@@ -127,6 +135,9 @@ justify-content: space-between;
    80%{
       border: none;
       opacity: 0.1;
+   }
+   99%{
+      display: none;
    }
    100%{
       border: none;
